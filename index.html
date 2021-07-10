@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400&family=Merriweather:wght@700&display=swap"
+    rel="stylesheet" />
+    <link rel="stylesheet" href="jass.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <h1 class="text-primary text-center bg-light py-2">Weather Dashboard</h1>
+    <div class="flex-row align-start align-stretch-md align-content-start align-content-stretch-md min-100-vh">
+        <div id ="sidebar" class="col-12 col-lg-3 p-3">
+            <h4 class="text-primary">Search for a City:</h4>
+            <form id="search-form" class="mb-3">
+                <input id="search-input" class="form-input w-100" type="text" placeholder="Example: london">
+                <button id="searchBtn" class="btn btn-info btn-block">Search</button>
+            </form> 
+        </div>
+                   
+        <div class="col-12 col-lg-9 p-3 ">
+          <div id="current-weather" class="w-100 p-1">
+            <h5 id="cityname"></h5>
+            <img id ="main-icon" src="" alt=""></img>
+            <p id="main-temp"></p>
+            <p id="main-wind"></p>
+            <p id="main-hum"></p>
+            <p id="main-uv"></p>
+          </div>
+          <h6 id ="sub-title"class="pt-3"></h6>
+          <div id="future-weather" class="text-light pl-3">
+            <div id ="5day" class="row justify-space-between">
+                <!--------------5 day forecast----------------->   
+             </div>
+          </div>
+        </div>
+    </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

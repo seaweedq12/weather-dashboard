@@ -1,0 +1,31 @@
+ul{
+    
+    margin-bottom: 5px;
+    border-bottom: 3px !important;
+}
+
+#current-weather{
+    border: 2px solid black;
+    min-height: 300px;
+}
+.btn-primary{
+    margin-bottom: 1rem;
+}
+form{
+    padding-bottom: 1rem;
+    border-bottom: 5px solid black;
+}
+.sub-body{
+    display: inline-block !important;
+}
+
+p{
+    font-size: small;
+}
+
+.row{
+    width: 101%;
+}
+.sub{
+    background-color: rgb(2, 46, 88);
+}
