@@ -2,9 +2,8 @@ var searchBtn = document.querySelector("#searchBtn");
 var cityname = document.querySelector("#cityname");
 var pastBtn = document.querySelector('.past')
 var searchvalue = [];
-//api.openweathermap.org/data/2.5/forecast/daily?q=" + city + ",AU&cnt=5&appid=feb634c81e9486b3baa517c80e55efd3
 
-
+/////////////////////////when page loads///////////////////////////////
 function init() {
     var storedsearch = JSON.parse(localStorage.getItem("searchvalue"));
     if (storedsearch !== null) {
@@ -13,11 +12,19 @@ function init() {
     renderlist();
 }
 
-function getweather(city){
+///////////////////////////////get the postion of city////////////////////////////////////////
+function getPosition(city){
     var weatherurl = "https://api.openweathermap.org/data/2.5/forecast?q="+ city +"&appid=feb634c81e9486b3baa517c80e55efd3"
     fetch(weatherurl)
       .then(function (response) {
           if (!response.ok) {
+            $('#5day').empty();
+            $('#main-icon').attr('src','').attr('alt','');
+            $('#main-temp').text('');
+            $('#main-wind').text('');
+            $('#main-hum').text('');
+            $('#main-uv').text('');
+            $('#sub-title').text('');
             $('#cityname').text('Error: '+response.status +', invalid input');
             throw response.json();
           }
@@ -29,7 +36,7 @@ function getweather(city){
         var coordvalue = Object.values(citycoord)
         var lat = coordvalue[0];
         var lon = coordvalue[1];
-        Getuvindex(lat,lon);
+        Getweather(lat,lon);
   
       })
       .catch(function (error) {
@@ -37,7 +44,8 @@ function getweather(city){
       });
 }
 
-function Getuvindex(lat, lon){
+////////////////////////////////////////////gets the weather///////////////////////////////////////////////
+function Getweather(lat, lon){
   var uvurl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,minutely&units=metric&appid=feb634c81e9486b3baa517c80e55efd3"
   fetch(uvurl)
     .then(function (response) {
@@ -56,6 +64,7 @@ function Getuvindex(lat, lon){
     });
 }
 
+//////////////////////////////////////renders the weather to page///////////////////////////////////////////
 function renderweather(uvRes){
   var iconobject = Object.values(uvRes.daily[0].weather[0])
   var iconvalue = iconobject[3]
@@ -84,6 +93,7 @@ function renderweather(uvRes){
   }
 }
 
+///////////////////////////////renders the list of button///////////////////////////////////////
 function renderlist(){
     $('#sidebar').children('button').remove();
     var search = searchvalue;
@@ -97,10 +107,12 @@ function renderlist(){
     }
 }
 
+///////////////////////////////stores the search values/////////////////////////////////////////
 function storescore(){
     localStorage.setItem("searchvalue", JSON.stringify(searchvalue));
 }
 
+///////////////////////////////search button//////////////////////////////
 searchBtn.addEventListener("click", function(event){
     event.preventDefault();
     var searchinput = document.querySelector("#search-input").value 
@@ -123,14 +135,15 @@ searchBtn.addEventListener("click", function(event){
       }
     }
     console.log(searchvalue.length)  
-    getweather(searchinput);
+    getPosition(searchinput);
 });
 
+//////////////////////////////list button///////////////////////////////////////
 $(document).on('click','.btn-primary',function(){
   $('#5day').empty();
   var reinput = $(this).attr('id');
   searchtext = reinput
-  getweather(searchtext);
+  getPosition(searchtext);
 });
 
 init();
